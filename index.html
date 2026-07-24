@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>何意味</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #fff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            display: block;
+            width: 80vw;
+            max-width: 600px;
+        }
+        img.rotate {
+            animation: ghostSpin 0.3s steps(10);
+        }
+        @keyframes ghostSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(1080deg);
+            }
+        }
+        button {
+            width: 30px;
+            height: 30px;
+            background: #333;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="pipe" src="steel.jpg" alt="">
+        <button id="btn"></button>
+    </div>
+
+    <script>
+        const img = document.getElementById('pipe');
+        const btn = document.getElementById('btn');
+
+        const metalSound = new Audio('steel.mp3');
+
+        function trigger() {
+            metalSound.currentTime = 0;
+            metalSound.play().catch(() => {});
+
+            img.classList.remove('rotate');
+            void img.offsetWidth;
+            img.classList.add('rotate');
+        }
+
+        btn.addEventListener('click', trigger);
+
+        window.addEventListener('load', () => {
+            setTimeout(trigger, 150);
+        });
+    </script>
+</body>
+</html>
